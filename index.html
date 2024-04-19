@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single Makeup Product</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-pink-100 p-4">
+    <div id="app" class="text-center">
+        <div v-if="product">
+            <img :src="product.image_link" alt="product image" class="rounded-lg shadow-md max-w-sm mx-auto"/>
+            <h2 class="font-semibold mt-4">Name: <span>{{ product.name }}</span></h2>
+            <p>Brand: <span>{{ product.brand }}</span></p>
+            <p>Description: <span>{{ product.description }}</span></p>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                product: null
+            },
+            mounted() {
+                fetch('https://makeup-api.herokuapp.com/api/v1/products/1047.json')
+                    .then(response => response.json())
+                    .then(data => this.product = data)
+            }
+        });
+    </script>
+</body>
+</html>
